@@ -11,11 +11,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.Viewport
 import com.mygdx.game.utils.GdxArray
+import com.mygdx.game.utils.logger
 
-class InputListeningSample : ApplicationAdapter(), InputProcessor{
-    companion object{
+class InputListeningSample : ApplicationAdapter(), InputProcessor {
+
+    companion object {
         @JvmStatic
-        private var log = com.mygdx.game.utils.logger<ModuleInfoSample>()
+        private var log = logger<ModuleInfoSample>()
     }
 
     lateinit var camera: OrthographicCamera
@@ -30,7 +32,7 @@ class InputListeningSample : ApplicationAdapter(), InputProcessor{
         log.debug("create()")
 
         camera = OrthographicCamera()
-        viewport = FitViewport(1080F,720F,camera)
+        viewport = FitViewport(1080F, 720F, camera)
         batch = SpriteBatch()
         font = BitmapFont(Gdx.files.internal("fonts/oswald-32.fnt"))
 
@@ -43,7 +45,7 @@ class InputListeningSample : ApplicationAdapter(), InputProcessor{
 
     override fun render() {
         // clear screen
-        Gdx.gl.glClearColor(0f,0f,0f, 1f)
+        Gdx.gl.glClearColor(0f, 0f, 0f, 1f)
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
 
         batch.projectionMatrix = camera.combined
@@ -54,18 +56,18 @@ class InputListeningSample : ApplicationAdapter(), InputProcessor{
         batch.end()
     }
 
-    private fun draw(){
-        for (i in 0 until messages.size){
+    private fun draw() {
+        for (i in 0 until messages.size) {
             font.draw(batch, messages[i],
                     20f,
-                    720f-40f*(i+1))
+                    720f - 40f * (i + 1))
         }
     }
 
-    private fun addMessage(message: String){
+    private fun addMessage(message: String) {
         messages.add(message)
 
-        if(messages.size > maxMessageCount){
+        if (messages.size > maxMessageCount) {
             messages.removeIndex(0)
         }
     }
